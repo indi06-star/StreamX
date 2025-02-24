@@ -15,9 +15,6 @@
         <SignUp v-if="authType === 'signup'" @close-modal="closeAuthModal" />
       </div>
     </div>
-
-    <!-- Movie Carousel Component -->
-    <MovieCarousel />
   </div>
 </template>
 
@@ -25,20 +22,23 @@
 import NavBar from './components/NavBar.vue';
 import Login from './components/Login.vue';
 import SignUp from './components/Signup.vue';
-import HomeView from './views/HomeView.vue';
 import MoviesView from './views/MoviesView.vue';
 import ComingSoonView from './views/ComingSoonView.vue';
- 
+import MoviesDetails from './components/MoviesDetails.vue';
+import AdminDashboardView from './views/AdminDashboardView.vue';
+import cart from './components/cart.vue';
 
 export default {
   components: {
-    HomeView,
     MoviesView,
     ComingSoonView,
     NavBar,
     Login,
     SignUp,
-  },
+    MoviesDetails,
+    AdminDashboardView,
+    cart
+  },//////////IF YOU WORKING WITH THE LOGIN ONLY EDIT THIS CODE IN THE APP.VUE PLUS LOGIN COMPONENT AND STORE FOR FRONTEND 
   data() {
     return {
       showAuthModal: false,
@@ -54,7 +54,7 @@ export default {
       this.showAuthModal = false;
     },
   },
-};
+};//////////LOGIN CODE ENDS
 </script>
 
 <style scoped>
@@ -70,17 +70,6 @@ export default {
   align-items: center;
   justify-content: center;
   z-index: 1000;
-}
-
-html{
-  margin: 0;
-  padding: 0;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; /* Helps with consistent sizing */
 }
 
 .modal-content {
@@ -100,15 +89,5 @@ html{
   background: none;
   font-size: 18px;
   cursor: pointer;
-}
-
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: black;
-  color: black;
-  border: 0px;
-  padding: 0;
-  object-fit: cover;
 }
 </style>

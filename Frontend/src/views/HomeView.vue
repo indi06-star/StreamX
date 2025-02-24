@@ -66,14 +66,14 @@ export default {
       trendingMovies: [
         { title: "Journey 2", image: "trending.jpeg" },
         { title: "The Joker", image: "trending3.webp" },
-        { title: "Freedom Hair", image: "trends.jpeg" },
+        { title: "Snow White", image: "trends.jpeg" },
         { title: "Mufasa", image: "trending4.jpg" },
       ],
       recommendedMovies: [
         { title: "Me Before You", image: "recommeded.jpg" },
         { title: "Smile", image: "recommended2.jpg" },
         { title: "Moana 2", image: "recommeded3.jpeg" },
-        { title: "Unstopable", image: "recommended4.jpg" },
+        { title: "The Marvels", image: "recommended4.jpg" },
       ],
     };
   },
