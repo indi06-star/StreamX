@@ -12,7 +12,7 @@
         <Login v-if="authType === 'login'" @close-modal="closeAuthModal" />
         
         <!-- SignUp Form -->
-        <SignUp v-if="authType === 'signup'" @close-modal="closeAuthModal" />
+        <SignUp v-if="authType === 'signup'" @close-modal="closeAuthModal" />   
       </div>
     </div>
   </div>

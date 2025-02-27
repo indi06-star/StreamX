@@ -1,10 +1,12 @@
 import { createApp } from 'vue';
 import App from './App.vue';  // The main App component
 import router from './router';  // Import the router
+import axios from 'axios';
+import store from './store'
 
 // Create the Vue app and use the router
-const app = createApp(App);
 
-app.use(router);  // Use the router in the app
 
-app.mount('#app');  // Mount the app to the DOM
+createApp(App).use(store).use(router).mount('#app')
+
+
