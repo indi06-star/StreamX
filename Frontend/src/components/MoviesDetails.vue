@@ -1,98 +1,331 @@
 <template>
-    <section class="movie-details">
-      <div class="movie-info">
-        <h1 class="movie-title">{{ movie.title }}</h1>
-        <img :src="require(`@/assets/${movie.image}`)" class="movie-img" :alt="movie.title" />
-        <p class="movie-description">{{ movie.description }}</p>
+  <section class="movie-container">
+    <div v-if="movie" class="movie-content">
+    <h1 class="movie-heading">{{ movie.title }}</h1>
+      <!-- Show only trailer -->
+      <div class="trailer-wrapper">
+        <iframe
+          v-if="movie.trailer_url"
+          :src="movie.trailer_url"
+          frameborder="0"
+          allowfullscreen
+          class="movie-trailer"
+        ></iframe>
       </div>
-    </section>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        movieDetail: [
-          { 
-            title: "Journey 2", 
-            image: "trending.jpeg", 
-            description: "A young adventurer teams up with a seasoned explorer on a thrilling expedition to the mysterious island of Atlantis."
-          },
-          { 
-            title: "The Joker", 
-            image: "trending3.webp", 
-            description: "A troubled comedian's descent into madness leads him to becoming the infamous villain, the Joker."
-          },
-          { 
-            title: "Diary of a Mad Black Women", 
-            image: "trends.jpeg", 
-            description: "A heartwarming story about a young woman’s journey to embrace her natural beauty and identity."
-          },
-          { 
-            title: "Mufasa", 
-            image: "trending4.jpg", 
-            description: "A prequel to The Lion King, this film tells the backstory of Mufasa’s rise to greatness."
-          },
-          { 
-            title: "Me Before You", 
-            image: "recommeded.jpg", 
-            description: "Me Before You is a romantic drama about a young caregiver who forms an unexpected bond with a paralyzed man, challenging both of their perspectives on life and love."
-          },
-          { 
-            title: "Smile", 
-            image: "recommended2.jpg", 
-            description: "Smile is a psychological horror film about a therapist who begins experiencing terrifying supernatural occurrences after witnessing a patient's traumatic suicide, leading her to uncover a dark and deadly curse."
-          },
-          { 
-            title: "Moana 2", 
-            image: "recommeded3.jpeg", 
-            description: "Moana 2 follows Moana on a brand-new adventure across the vast seas, where she reunites with Maui and embarks on an epic journey to discover new lands and face unforeseen challenges beyond the horizon."
-          },
-          { 
-            title: "The Marvels", 
-            image: "recommended4.jpg", 
-            description: "The Marvels follows Carol Danvers (Captain Marvel) as she teams up with Kamala Khan (Ms. Marvel) and Monica Rambeau after their powers become mysteriously intertwined. Together, they must work as a team to face a new cosmic threat and restore balance to the universe."
-          }
-        ]
+      
+      <p class="movie-summary">{{ movie.description }}</p>
+
+      <div class="movie-details-container">
+        <p class="movie-year">Year Released: 2012</p>
+        <p class="movie-duration">Duration: 94 mins</p>
+        <p class="movie-price">Price: R29.99</p>
+      </div>
+    </div>
+    <p v-if="!movie && !error">Loading movie details...</p>
+    <p v-if="error" class="loading-message">{{ error }}</p>
+    <button type="button" class="button">
+  <span class="button__text">Add To Cart</span>
+  <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+</button>
+  </section>
+</template>
+
+<script>
+export default {
+  props: ['id', 'trailer_url', 'description', 'price'],  // Accept passed props
+
+  data() {
+    return {
+      movie: null,
+      error: null,
+    };
+  },
+
+  mounted() {
+    // Retrieve passed params or fetch data if not available
+    if (this.trailer_url && this.description && this.price) {
+      this.movie = {
+        trailer_url: this.trailer_url,
+        description: this.description,
+        price: this.price,
+        title: 'Movie Title' // You can replace this with dynamic title if needed
       };
-    },
-    computed: {
-      movie() {
-        const movieTitle = this.$route.params.title; // Get the title from the URL
-        return this.movieDetail.find(m => m.title.toLowerCase() === movieTitle.toLowerCase()) || {}; 
-      }
+    } else {
+      const movieId = this.id || this.$route.params.id;
+      this.fetchMovieDetails(movieId);
     }
-  };
-  </script>
-  
-  <style scoped>
-  .movie-details {
-    padding: 40px;
-    background-color: black;
-    color: white;
-    text-align: center;
+  },
+
+  methods: {
+    async fetchMovieDetails(movieId) {
+      try {
+        const response = await fetch(`http://localhost:3000/movies/${movieId}`);
+        if (response.ok) {
+          const movieData = await response.json();
+          this.movie = movieData;
+        } else {
+          throw new Error("Movie not found");
+        }
+      } catch (error) {
+        this.error = error.message || "Failed to load movie details. Please try again later.";
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+/* Styles the main container for the movie section */
+.movie-container {
+  background-color: #121212;
+  color: white;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Styles the movie content box */
+.movie-content {
+  width: 100%;
+  max-width: 960px;
+  padding: 20px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Wrapper for the movie trailer */
+.trailer-wrapper {
+  width: 100%;
+  height: 480px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Styles the actual movie trailer */
+.movie-trailer {
+  width: 90%;
+  height: 100%;
+  max-width: 1000px;
+  border-radius: 8px;
+}
+
+/* Styles the movie title */
+.movie-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffcc00;
+}
+
+/* Styles the movie summary text */
+.movie-summary {
+  font-size: 1.1rem;
+  margin: 8px 0;
+  color: #bbb;
+  line-height: 1.5;
+  text-align: justify;
+  max-width: 80%;
+}
+
+/* Container for movie details like year, duration, and price */
+.movie-details-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+/* General styles for movie details */
+.movie-year,
+.movie-duration,
+.movie-price {
+  font-size: 1rem;
+  color: #fff;
+}
+
+/* Styles the movie release year */
+.movie-year {
+  color: #ffcc00;
+}
+
+/* Styles the movie duration */
+.movie-duration {
+  color: #66ff66;
+}
+
+/* Styles the movie price */
+.movie-price {
+  color: #ff6666;
+  font-weight: bold;
+}
+
+/* Styles the movie poster image */
+.movie-poster {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Styles for the interactive button */
+.button {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #34974d;
+  background-color: #3aa856;
+}
+
+/* Adds smooth transitions for button elements */
+.button, .button__icon, .button__text {
+  transition: all 0.3s;
+}
+
+/* Styles the button text */
+.button .button__text {
+  transform: translateX(30px);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Styles the icon inside the button */
+.button .button__icon {
+  position: absolute;
+  transform: translateX(109px);
+  height: 100%;
+  width: 39px;
+  background-color: #34974d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Styles the SVG icon inside the button */
+.button .svg {
+  width: 30px;
+  stroke: #fff;
+}
+
+/* Changes button appearance on hover */
+.button:hover {
+  background: #34974d;
+}
+
+/* Hides button text on hover */
+.button:hover .button__text {
+  color: transparent;
+}
+
+/* Expands the icon container on hover */
+.button:hover .button__icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+/* Changes button icon background when clicked */
+.button:active .button__icon {
+  background-color: #2e8644;
+}
+
+/* Changes button border when clicked */
+.button:active {
+  border: 1px solid #2e8644;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  /* Adjust movie content box width */
+  .movie-content {
+    padding: 15px;
+    max-width: 100%;
   }
-  
-  .movie-info {
-    max-width: 800px;
-    margin: 0 auto;
+
+  /* Adjust trailer wrapper height */
+  .trailer-wrapper {
+    height: 300px;
   }
-  
-  .movie-title {
-    font-size: 2rem;
-    margin-bottom: 20px;
+
+  /* Adjust trailer size */
+  .movie-trailer {
+    width: 95%;
+    max-width: none;
   }
-  
-  .movie-img {
-    width: 250px;
-    height: auto;
-    border-radius: 10px;
+
+  /* Adjust font sizes */
+  .movie-heading {
+    font-size: 1.5rem;
   }
-  
-  .movie-description {
-    font-size: 1.2rem;
-    margin-top: 20px;
-    color: #bbb;
+
+  .movie-summary {
+    font-size: 1rem;
   }
-  </style>
-  
+
+  .movie-details-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Adjust button size */
+  .button {
+    width: 160px;
+    height: 45px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Adjust movie content box padding */
+  .movie-content {
+    padding: 10px;
+  }
+
+  /* Adjust trailer wrapper height */
+  .trailer-wrapper {
+    height: 220px;
+  }
+
+  /* Adjust trailer size */
+  .movie-trailer {
+    width: 90%;
+  }
+
+  /* Adjust font sizes */
+  .movie-heading {
+    font-size: 1.3rem;
+  }
+
+  .movie-summary {
+    font-size: 0.9rem;
+  }
+
+  .movie-details-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Adjust button size */
+  .button {
+    width: 140px;
+    height: 40px;
+  }
+}
+</style>
+

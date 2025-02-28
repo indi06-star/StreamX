@@ -1,8 +1,24 @@
 import express from 'express';
-import { getMovies } from '../controller/moviesController.js';
+import { getMovies, getSingleMovie } from '../controller/moviesController.js';
 
 const router = express.Router();
 
-router.get('/', getMovies);
+// Route to get all movies
+router.get('/', async (req, res) => {
+    try {
+      await getMovies(req, res);  // Use your existing function for handling logic
+    } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+// Route to get a single movie by ID
+router.get('/:movie_id', async (req, res) => {
+  try {
+    await getSingleMovie(req, res);  // Use your existing function for handling logic
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 export default router;

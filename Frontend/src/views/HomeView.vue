@@ -16,27 +16,11 @@
     <div class="movie-cards">
       <div 
         class="movie-card"
-        v-for="(movie, index) in trendingMovies"
-        :key="index"
+        v-for="(movie, index) in movies"
+        :key="movie.movie_id"
       >
-        <router-link :to="'/movies/' + movie.title" class="movie-card-link">
-          <img :src="require(`@/assets/${movie.image}`)" class="movie-img" :alt="movie.title" />
-          <p class="movie-title">{{ movie.title }}</p>
-        </router-link>
-      </div>
-    </div>
-
-    <h2 class="section-title">Recommended for You</h2>
-
-    <!-- Movie Cards Section -->
-    <div class="movie-cards">
-      <div 
-        class="movie-card"
-        v-for="(movie, index) in recommendedMovies"
-        :key="index"
-      >
-        <router-link :to="'/movies/' + movie.title" class="movie-card-link">
-          <img :src="require(`@/assets/${movie.image}`)" class="movie-img" :alt="movie.title" />
+        <router-link :to="'/movies/' + movie.movie_id" class="movie-card-link">
+          <img :src="movie.img_link" class="movie-img" :alt="movie.title" />
           <p class="movie-title">{{ movie.title }}</p>
         </router-link>
       </div>
@@ -60,22 +44,26 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      trendingMovies: [
-        { title: "Journey 2", image: "trending.jpeg" },
-        { title: "The Joker", image: "trending3.webp" },
-        { title: "Snow White", image: "trends.jpeg" },
-        { title: "Mufasa", image: "trending4.jpg" },
-      ],
-      recommendedMovies: [
-        { title: "Me Before You", image: "recommeded.jpg" },
-        { title: "Smile", image: "recommended2.jpg" },
-        { title: "Moana 2", image: "recommeded3.jpeg" },
-        { title: "The Marvels", image: "recommended4.jpg" },
-      ],
+      movies: [],
     };
+  },
+  created() {
+    this.fetchMovies();
+  },
+  methods: {
+    async fetchMovies() {
+      try {
+        const response = await axios.get('http://localhost:3000/movies');
+        this.movies = response.data;
+      } catch (error) {
+        console.error("There was an error fetching the movies:", error);
+      }
+    },
   },
 };
 </script>

@@ -19,7 +19,7 @@ const routes = [
     component: MoviesView
   },
   {
-    path: '/movies/:title',  // Route for individual movie details
+    path: '/movies/:id',  // Route for individual movie details
     name: 'movie-details',
     component: MovieDetail, // Use MovieDetail component
     props: true
