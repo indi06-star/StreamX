@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
 
-export default createStore({
+const store = createStore({
   state: {
     movies: [], // Store all movies
     movie: null // Store single movie

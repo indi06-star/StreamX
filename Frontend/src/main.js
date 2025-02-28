@@ -6,9 +6,7 @@ import axios from 'axios';
 
 // Create the Vue app and use the router
 const app = createApp(App);
-app.config.globalProperties.$axios = axios;
 
 app.use(store);  // Use the store in the app
 app.use(router);  // Use the router in the app
 
-app.mount('#app');  // Mount the app to the DOM

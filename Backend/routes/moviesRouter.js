@@ -21,4 +21,5 @@ router.get('/:movie_id', async (req, res) => {
   }
 });
 
+
 export default router;
