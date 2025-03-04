@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUsers, getUserById, resetPassword,signUpUser,} from '../controller/usersController.js';
+import { getUsers, getUserById, resetPassword,signUpUser, loginUser} from '../controller/usersController.js';
 
 const router = express.Router();
 
@@ -7,12 +7,12 @@ const router = express.Router();
 router.get('/', getUsers);
 // Get a user by user_id
 router.get('/users/:user_id', getUserById);
-// Reset password 
-router.patch('/reset-password', resetPassword); 
+// Reset password
+router.patch('/reset-password', resetPassword);
 //SignUp User
-router.post('/', signUpUser); // User sign-up
+router.post('/signup', signUpUser); // User sign-up
 //Login
-// router.post('/',loginUser);
+router.post('/login',loginUser);
 
 
 export default router;

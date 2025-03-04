@@ -223,7 +223,3 @@ export default {
   }
 }
 </style>
-
-
-
-

@@ -27,6 +27,7 @@ import ComingSoonView from './views/ComingSoonView.vue';
 import MoviesDetails from './components/MoviesDetails.vue';
 import AdminDashboardView from './views/AdminDashboardView.vue';
 import cart from './components/cart.vue';
+import Payment from './components/Payment.vue';
 
 export default {
   components: {

@@ -16,9 +16,9 @@
       <p class="movie-summary">{{ movie.description }}</p>
 
       <div class="movie-details-container">
-        <p class="movie-year">Year Released: 2012</p>
-        <p class="movie-duration">Duration: 94 mins</p>
-        <p class="movie-price">Price: R29.99</p>
+        <p class="movie-year">Year Released: {{movie.year_released }}</p>
+        <p class="movie-duration">Duration: {{movie.duration}} mins</p>
+        <p class="movie-price">Price: R {{ movie.rental_price }}</p>
       </div>
     </div>
     <p v-if="!movie && !error">Loading movie details...</p>
@@ -75,221 +75,185 @@ export default {
 </script>
 
 <style scoped>
-/* Styles the main container for the movie section */
+/* Main container */
 .movie-container {
-  background-color: #121212;
-  color: white;
-  text-align: center;
+  background: #121212;
+  color: #fff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  justify-content: flex-start;
+  padding: 40px 20px;
+  text-align: center;
 }
 
-/* Styles the movie content box */
+/* Content Box */
 .movie-content {
   width: 100%;
-  max-width: 960px;
-  padding: 20px;
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.85);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
+  max-width: 1100px;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Wrapper for the movie trailer */
+.movie-content:hover {
+  transform: scale(1.02);
+}
+
+/* Title */
+.movie-heading {
+  font-size: 2.8rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #ffcc00;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Trailer Wrapper */
 .trailer-wrapper {
   width: 100%;
-  height: 480px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 500px;
   margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+  transition: transform 0.4s ease-in-out;
 }
 
-/* Styles the actual movie trailer */
+.trailer-wrapper:hover {
+  transform: scale(1.03);
+}
+
 .movie-trailer {
-  width: 90%;
+  width: 100%;
   height: 100%;
-  max-width: 1000px;
-  border-radius: 8px;
+  border-radius: 12px;
+  object-fit: cover;
 }
 
-/* Styles the movie title */
-.movie-heading {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #ffcc00;
-}
-
-/* Styles the movie summary text */
+/* Summary */
 .movie-summary {
-  font-size: 1.1rem;
-  margin: 8px 0;
+  font-size: 1.2rem;
   color: #bbb;
-  line-height: 1.5;
+  margin-bottom: 20px;
   text-align: justify;
-  max-width: 80%;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  max-width: 800px;
+  transition: color 0.3s;
 }
 
-/* Container for movie details like year, duration, and price */
-.movie-details-container {
-  display: flex;
-  gap: 15px;
-  margin-top: 20px;
-  justify-content: center;
-}
-
-/* General styles for movie details */
-.movie-year,
-.movie-duration,
-.movie-price {
-  font-size: 1rem;
+.movie-summary:hover {
   color: #fff;
 }
 
-/* Styles the movie release year */
+/* Details */
+.movie-details-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.movie-details-container p {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background 0.3s ease-in-out;
+}
+
+.movie-details-container p:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 .movie-year {
   color: #ffcc00;
 }
 
-/* Styles the movie duration */
 .movie-duration {
   color: #66ff66;
 }
 
-/* Styles the movie price */
 .movie-price {
   color: #ff6666;
   font-weight: bold;
 }
 
-/* Styles the movie poster image */
-.movie-poster {
-  width: 100%;
-  height: auto;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-}
 
-/* Styles for the interactive button */
+/* Button Base */
 .button {
   position: relative;
-  width: 150px;
-  height: 40px;
+  width: 180px; /* Enough space for text */
+  height: 45px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  border: 1px solid #34974d;
-  background-color: #3aa856;
+  justify-content: center;
+  border: 1px solid #ffcc00; /* Prime Video gold */
+  background-color: #ffcc00;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Adds smooth transitions for button elements */
-.button, .button__icon, .button__text {
-  transition: all 0.3s;
-}
-
-/* Styles the button text */
+/* Button Text - Always Visible */
 .button .button__text {
-  transform: translateX(30px);
-  color: #fff;
+  position: absolute;
+  color: #121212;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Styles the icon inside the button */
+/* Button Icon Wrapper - Covers Entire Button on Hover */
 .button .button__icon {
   position: absolute;
-  transform: translateX(109px);
+  right: 0;
+  width: 45px; /* Start as small square */
   height: 100%;
-  width: 39px;
-  background-color: #34974d;
+  background-color: #d4a800; /* Darker gold */
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Styles the SVG icon inside the button */
+/* SVG Icon */
 .button .svg {
-  width: 30px;
-  stroke: #fff;
+  width: 24px;
+  stroke: #121212; /* Matches text */
 }
 
-/* Changes button appearance on hover */
-.button:hover {
-  background: #34974d;
+/* Hover Effect - Icon Covers Button */
+.button:hover .button__icon {
+  width: 100%; /* Expands to cover full button */
+  right: 0;
 }
 
-/* Hides button text on hover */
+/* Hover Effect - Text Disappears */
 .button:hover .button__text {
   color: transparent;
 }
 
-/* Expands the icon container on hover */
-.button:hover .button__icon {
-  width: 148px;
-  transform: translateX(0);
-}
-
-/* Changes button icon background when clicked */
+/* Active Effect - Darker Shade */
 .button:active .button__icon {
-  background-color: #2e8644;
+  background-color: #b58900;
 }
 
-/* Changes button border when clicked */
 .button:active {
-  border: 1px solid #2e8644;
+  border: 1px solid #b58900;
 }
 
-/* Media queries for responsiveness */
-@media (max-width: 768px) {
-  /* Adjust movie content box width */
-  .movie-content {
-    padding: 15px;
-    max-width: 100%;
-  }
-
-  /* Adjust trailer wrapper height */
-  .trailer-wrapper {
-    height: 300px;
-  }
-
-  /* Adjust trailer size */
-  .movie-trailer {
-    width: 95%;
-    max-width: none;
-  }
-
-  /* Adjust font sizes */
-  .movie-heading {
-    font-size: 1.5rem;
-  }
-
-  .movie-summary {
-    font-size: 1rem;
-  }
-
-  .movie-details-container {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  /* Adjust button size */
-  .button {
-    width: 160px;
-    height: 45px;
-    font-size: 0.9rem;
-  }
-}
 
 @media (max-width: 480px) {
   /* Adjust movie content box padding */

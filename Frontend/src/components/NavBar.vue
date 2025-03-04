@@ -18,7 +18,7 @@
       <li><router-link to="/movies">Movies</router-link></li>
       <li><router-link to="/coming-soon">Coming Soon</router-link></li>
       <li><router-link to="/my-list">My List</router-link></li>
-      <li><router-link to="/admin-dashboard">Admin Dashboard</router-link></li>
+      <li><router-link to="/adminDashboard">Admin Dashboard</router-link></li>
     </ul>
 
     <!-- ✅ Authentication Buttons -->
@@ -48,8 +48,7 @@ export default {
 </script>
 
 <style scoped>
-/* ✅ Navbar Styles */
-/* ✅ Navbar Styles */
+/* Navbar Styles */  
 .navbar {
   display: flex;
   align-items: center;

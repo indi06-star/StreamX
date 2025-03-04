@@ -1,8 +1,9 @@
 import express from 'express';
-import { getRentals } from '../controller/rentalsController.js';
+import mockAuth from '../middleware/mockAuth.js';
+import { rentMovie } from '../controller/rentalsController.js'; // FIXED: Import correct function
 
 const router = express.Router();
 
-router.get('/', getRentals);
+router.post('/', mockAuth, rentMovie); // FIXED: Correct function name
 
 export default router;
