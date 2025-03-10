@@ -58,7 +58,7 @@ export default {
   methods: {
     async fetchMovies() {
       try {
-        const response = await axios.get('http://localhost:3000/movies');
+        const response = await axios.get('http://localhost:3001/movies');
         this.movies = response.data;
       } catch (error) {
         console.error("There was an error fetching the movies:", error);

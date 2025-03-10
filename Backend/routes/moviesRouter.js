@@ -1,25 +1,11 @@
 import express from 'express';
-import { getMovies, getSingleMovie } from '../controller/moviesController.js';
-
+import { getMovies, deleteMovie, postMovies, patchMovie, getMovieById } from '../controller/moviesController.js';
 const router = express.Router();
-
-// Route to get all movies
-router.get('/', async (req, res) => {
-    try {
-      await getMovies(req, res);  // Use your existing function for handling logic
-    } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
-
-// Route to get a single movie by ID
-router.get('/:movie_id', async (req, res) => {
-  try {
-    await getSingleMovie(req, res);  // Use your existing function for handling logic
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
+// Movies Routes
+router.get('/', getMovies); // Get all movies
+router.get('/:movie_id', getMovieById); // Get movie by movie_id
+router.delete('/:movie_id', deleteMovie); // Corrected: Delete movie by movie_id
+router.post('/', postMovies); // Post new movie
+router.patch('/:movie_id', patchMovie); // Update movie by movie_id
 
 export default router;

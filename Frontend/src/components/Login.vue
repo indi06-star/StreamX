@@ -1,116 +1,96 @@
 <template>
-  <div class="auth-form">
-    <h2>Login</h2>
-    <form @submit.prevent="submitLogin">
-      <div>
-        <label>
-          <span>Email:</span>
-          <input type="email" v-model="email" />
-        </label>
+  <div class="login-container">
+    <form @submit.prevent="loginMethod">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          v-model="email"
+          placeholder="Enter your email"
+          required
+        />
       </div>
-      <br />
-      <div>
-        <label>
-          <span>Password:</span>
-          <input type="password" v-model="password" />
-        </label>
+      <div class="form-group">
+        <label for="password_hash">Password:</label>
+        <input
+          type="password"
+          id="password_hash"
+          v-model="password_hash"
+          placeholder="Enter your password"
+          required
+        />
       </div>
-      <br /><br />
+      <div v-if="errorMessage" class="error-message">
+        <p>{{ errorMessage }}</p>
+      </div>
       <button type="submit">Login</button>
     </form>
-
-    <!-- Pop-up Modal -->
-    <div v-if="showError" class="modal">
-      <div class="modal-content">
-        <p>{{ errorMessage }}</p>
-        <button @click="showError = false">OK</button>
-      </div>
-    </div>
   </div>
 </template>
-
 <script>
 export default {
   data() {
     return {
-      email: "",
-      password: "",
-      showError: false,
-      errorMessage: "",
+      email: '',
+      password_hash: '',
     };
   },
+  computed: {
+    errorMessage() {
+      return this.$store.getters.errorMessage;
+    },
+  },
   methods: {
-    async submitLogin() {
-      if (!this.email || !this.password) {
-        this.errorMessage = "Email and password are required.";
-        this.showError = true;
-        return;
-      }
-
-      const loginData = {
+    async loginMethod() {
+      await this.$store.dispatch('loginUser', {
         email: this.email,
-        password: this.password,
-      };
-
-      try {
-        await this.$store.dispatch("loginUser", loginData);
-        this.$router.push("/"); // Redirect after login
-      } catch (error) {
-        this.errorMessage = "Invalid email or password.";
-        this.showError = true;
-        console.error("Login error:", error);
+        password: this.password_hash, // Corrected to 'password'
+      });
+      if (this.$store.getters.token) {
+        await this.$router.push('/');
       }
     },
   },
 };
 </script>
-
 <style scoped>
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  max-width: 400px;
-  margin: 0 auto;
-  text-align: center;
-}
-input {
-  padding: 10px;
-  width: 100%;
-  border: 1px solid #ccc;
+.login-container {
+  width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
   border-radius: 5px;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
   box-sizing: border-box;
 }
 button {
+  width: 100%;
   padding: 10px;
-  background-color: #f39c12;
+  background-color: #007BFF;
   color: white;
   border: none;
+  border-radius: 3px;
   cursor: pointer;
-  width: 100%;
-  border-radius: 5px;
 }
-button:hover {
-  background-color: #e67e22;
+.button:hover{
+    background-color: #0056B3;
 }
-
-/* Modal Styles */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
-  text-align: center;
-  min-width: 300px;
+.error-message {
+  color: red;
+  margin-top: 10px;
 }
 </style>

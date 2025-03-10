@@ -2,22 +2,15 @@
   <div id="app">
     <NavBar @open-auth-modal="openAuthModal" />
     <router-view />
-    
-    <!-- Authentication Modal -->
     <div v-if="showAuthModal" class="modal-overlay" @click.self="closeAuthModal">
       <div class="modal-content">
-        <button class="close-btn" @click="closeAuthModal">✖</button>
-        
-        <!-- Login Form -->
+        <button class="close-btn" @click="closeAuthModal">:heavy_multiplication_x:</button>
         <Login v-if="authType === 'login'" @close-modal="closeAuthModal" />
-        
-        <!-- SignUp Form -->
-        <SignUp v-if="authType === 'signup'" @close-modal="closeAuthModal" />   
+        <SignUp v-if="authType === 'signup'" @close-modal="closeAuthModal" />
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import NavBar from './components/NavBar.vue';
 import Login from './components/Login.vue';
@@ -27,8 +20,6 @@ import ComingSoonView from './views/ComingSoonView.vue';
 import MoviesDetails from './components/MoviesDetails.vue';
 import AdminDashboardView from './views/AdminDashboardView.vue';
 import cart from './components/cart.vue';
-import Payment from './components/Payment.vue';
-
 export default {
   components: {
     MoviesView,
@@ -38,8 +29,8 @@ export default {
     SignUp,
     MoviesDetails,
     AdminDashboardView,
-    cart
-  },//////////IF YOU WORKING WITH THE LOGIN ONLY EDIT THIS CODE IN THE APP.VUE PLUS LOGIN COMPONENT AND STORE FOR FRONTEND 
+    cart,
+  },
   data() {
     return {
       showAuthModal: false,
@@ -55,9 +46,15 @@ export default {
       this.showAuthModal = false;
     },
   },
-};//////////LOGIN CODE ENDS
+  watch: {
+    "$store.getters.token"(newToken) {
+      if (newToken) {
+        this.closeAuthModal();
+      }
+    },
+  },
+};
 </script>
-
 <style scoped>
 /* Modal Styles */
 .modal-overlay {
@@ -72,7 +69,6 @@ export default {
   justify-content: center;
   z-index: 1000;
 }
-
 .modal-content {
   background: white;
   padding: 20px;
@@ -81,7 +77,6 @@ export default {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   position: relative;
 }
-
 .close-btn {
   position: absolute;
   top: 10px;

@@ -1,9 +1,13 @@
 import express from 'express';
-import { getPayments, processPayment } from '../controller/paymentsController.js';
+import { processPaymentController ,getPaymentByIdController} from '../controller/paymentsController.js';
+import {cartMiddleware  } from '../middleware/cartMiddleware.js';
 
 const router = express.Router();
 
-router.get('/', getPayments);
-router.post('/pay', processPayment);
+// Route to process a payment
+router.post('/',cartMiddleware, processPaymentController);
+
+// Route to get a single payment by ID
+router.get('/payments/:id', getPaymentByIdController); 
 
 export default router;

@@ -1,33 +1,52 @@
-import { getAllPayments, addPayment } from '../model/paymentsModal.js';
+import paymentsModel from '../model/paymentsModal.js';
 
-export const getPayments = async (req, res) => {
-  try {
-    const payments = await getAllPayments();
-    res.status(200).json(payments);
-  } catch (error) {
-    console.error('Error fetching payments:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+
+export const processPaymentController = async (req, res) => {
+    // try {
+        const userId = req.user.userId; // Ensure userId exists
+        console.log(userId);
+        
+        const paymentMethod ='Debit Card' // Get payment details from the request body
+
+        if (!userId) {
+            return res.status(400).json({ success: false, message: 'User ID is required' });
+        }
+
+        if ( !paymentMethod) {
+            return res.status(400).json({ success: false, message: 'Payment ID and payment method are required' });
+        }
+
+        // Call the model to process the payment
+        const paymentResult = await paymentsModel.processDebitCardPayment(userId, paymentMethod);
+
+        if (paymentResult.status === 'success') {
+            res.json({ success: true, message: 'Payment successful!' });
+        } else {
+            res.status(402).json({ success: false, message: 'Payment failed' });
+        }
+    // } catch (error) {
+    //     console.error('Error processing payment:', error);
+    //     res.status(500).json({ success: false, message: 'Failed to process payment' });
+    // }
 };
 
-// Process a payment
-export const processPayment = async (req, res) => {
-  try {
-    const { rental_id, user_id, amount } = req.body;
+export const getPaymentByIdController = async (req, res) => {
+    try {
+        const paymentId = req.params.id;
 
-    if (!rental_id || !user_id || !amount) {
-      return res.status(400).json({ error: 'Missing required fields' });
+        if (!paymentId) {
+            return res.status(400).json({ message: 'Payment ID is required' });
+        }
+
+        const payment = await paymentsModel.getPaymentById(paymentId);
+
+        if (payment) {
+            res.status(200).json(payment);
+        } else {
+            res.status(404).json({ message: 'Payment not found' });
+        }
+    } catch (error) {
+        console.error('Error fetching payment:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
-
-    const paymentSuccess = await addPayment(rental_id, user_id, amount);
-
-    if (paymentSuccess) {
-      res.status(201).json({ message: 'Payment successful' });
-    } else {
-      res.status(400).json({ error: 'Payment failed' });
-    }
-  } catch (error) {
-    console.error('Error processing payment:', error);
-    res.status(500).json({ error: error.message });
-  }
 };
