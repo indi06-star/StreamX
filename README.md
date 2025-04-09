@@ -25,7 +25,7 @@ Prerequisites:
 MySQL Server installed and running
 Clone the Repository:
 
-git clone https://github.com/keanan557/PulseFit.git
+git clone https:https://github.com/indi06-star/StreamX.git
 cd frontend and 
 cd api
 Install Dependencies (if using Composer):
@@ -33,8 +33,8 @@ Install Dependencies (if using Composer):
 npm i
 Database Setup:
 
-Create a new database named PulseFit in your MySQL server.
-Import the database schema from the provided SQL file (database/PulseFit.sql - if applicable). You can do this using a MySQL client (like phpMyAdmin or MySQL Workbench) or the command line:
+Create a new database named streamx_db in your MySQL server.
+Import the database schema from the provided SQL file (StreamXDB.sql - if applicable). You can do this using a MySQL client (like phpMyAdmin or MySQL Workbench) or the command line:
 mysql -u [your_mysql_username] -p PulseFit < database/PulseFit.sql
 Configure the database connection details in your PHP configuration file (e.g., config.php, .env):
 <?php
