@@ -1,6 +1,7 @@
 ![image broken](https://github.com/indi06-star/Images/blob/11cc858bf8cd4e4dbcd67b90e06cd9ea5b9462a5/Screenshot%202025-04-09%20114812.png)
 
 ![image broken](https://github.com/indi06-star/Images/blob/af13e05cd872032d2f770ad45def4945229f9e53/Cart-ezgif.com-video-to-gif-converter%20(1).gif)
+
 A fully functional e-commerce website built by Indiphile,Wade,Tiffany,Anathi for the Module 3 assignment. StreamX is an online movie rental platform that offers pay-per-view access to a wide range of movies without requiring subscriptions. Our goal is to provide an affordable, flexible, and secure rental service that competes with platforms like Google Play Movies while offering a superior customer experience.
 Table of Contents
 Live Demo
