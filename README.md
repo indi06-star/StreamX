@@ -1,4 +1,4 @@
-![image broken](https://github.com/indi06-star/Images/blob/af13e05cd872032d2f770ad45def4945229f9e53/Screenshot%202025-04-09%20104951.png)
+![image broken](https://github.com/indi06-star/Images/blob/11cc858bf8cd4e4dbcd67b90e06cd9ea5b9462a5/Screenshot%202025-04-09%20114812.png)
 
 ![image broken](https://github.com/indi06-star/Images/blob/af13e05cd872032d2f770ad45def4945229f9e53/Cart-ezgif.com-video-to-gif-converter%20(1).gif)
 A fully functional e-commerce website built by Indiphile,Wade,Tiffany,Anathi for the Module 3 assignment. StreamX offers a rental platform for people who dont want subscribtion copmm
