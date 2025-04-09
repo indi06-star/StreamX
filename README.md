@@ -35,14 +35,14 @@ Database Setup:
 
 Create a new database named streamx_db in your MySQL server.
 Import the database schema from the provided SQL file (StreamXDB.sql - if applicable). You can do this using a MySQL client (like phpMyAdmin or MySQL Workbench) or the command line:
-mysql -u [your_mysql_username] -p PulseFit < database/PulseFit.sql
+mysql -u [your_mysql_username] -streamx_db < database/StreamXDB.sql
 Configure the database connection details in your PHP configuration file (e.g., config.php, .env):
 <?php
 // Example configuration
 define('DB_HOST', 'localhost');
 define('DB_USER', 'your_db_user');
 define('DB_PASS', 'your_db_password');
-define('DB_NAME', 'PulseFit');
+define('DB_NAME', 'streamx_db');
 ?>
 Web Server Configuration:
 
@@ -59,14 +59,13 @@ This e-commerce website implements the following key features:
 
 User Login and Registration: Secure user registration and login functionality.
 User Interface Design and UX/UI Principles: A user-friendly and visually appealing design adhering to UX/UI best practices.
-Product/Service Display and Catalog Implementation: Clear and organized display of mirror products with detailed information and browsing capabilities.
-Shopping Cart and Order Process: A functional shopping cart allowing users to add, modify, and checkout with their selected items.
+Service Display and Catalog Implementation: Clear and organized display of movies with detailed information and browsing capabilities.
+Movie Cart and Order Process: A functional movie cart allowing users to add, modify, and checkout with their selected items.
 Responsive Design Implementation: The website adapts seamlessly to various screen sizes (desktop, tablet, mobile).
-Database Design and Implementation: A well-structured database (PulseFit) to store user, product, and order data.
+Database Design and Implementation: A well-structured database (StreamXDBt) to store user, product, and order data.
 Authentication and User Management: Secure authentication for users and potentially an administrative interface for managing the website.
-Product/Service Data Management: [If implemented] An administrative interface for adding, editing, and deleting products.
-Order Processing and Management: [If implemented] An administrative interface for viewing and managing customer orders.
-Payment System Integration: [Specify if actual or simulated] Integration with a payment gateway (either a real implementation or a simulated process).
+Service Data Management: An administrative interface for adding, editing, and deleting products.
+Payment System Integration: Integration with a payment gateway (a simulated process).
 Overall System Integration (Front-end and Back-end): Seamless communication and data flow between the user interface and the server-side logic.
 Credits (If Applicable)
 [Acknowledge any libraries, frameworks, or resources used, e.g.:]
@@ -75,6 +74,6 @@ Vue: [https://vuejs.org/]
 MySql: [https://www.mysql.com/]
 Node : [https://nodejs.org/en]
 Author
-Keanan Anele Mogale Sphele
+Indiphile Wade Tifanny Anathi
 
 github.com/keanan557
