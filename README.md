@@ -27,7 +27,7 @@ Clone the Repository:
 
 git clone https:https://github.com/indi06-star/StreamX.git
 cd frontend and 
-cd api
+cd backend
 Install Dependencies (if using Composer):
 
 npm i
@@ -76,4 +76,4 @@ Node : [https://nodejs.org/en]
 Author
 Indiphile Wade Tifanny Anathi
 
-github.com/keanan557
+https://github.com/indi06-star
