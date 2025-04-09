@@ -68,8 +68,7 @@ Authentication and User Management: Secure authentication for users and potentia
 Service Data Management: An administrative interface for adding, editing, and deleting products.
 Payment System Integration: Integration with a payment gateway (a simulated process).
 Overall System Integration (Front-end and Back-end): Seamless communication and data flow between the user interface and the server-side logic.
-Credits (If Applicable)
-[Acknowledge any libraries, frameworks, or resources used, e.g.:]
+Credits 
 
 Vue: [https://vuejs.org/]
 MySql: [https://www.mysql.com/]
