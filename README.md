@@ -52,7 +52,7 @@ Run the Development Server (Example using PHP's built-in server):
 
 npm run serve for frontend
 node --watch index.js for api 
-Then, open your web browser and navigate to http://localhost:8000.
+Then, open your web browser and navigate to [http://localhost:8000.](http://localhost:8080/)
 
 Key Features
 This e-commerce website implements the following key features:
