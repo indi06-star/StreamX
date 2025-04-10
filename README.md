@@ -33,7 +33,7 @@ cd frontend and
 cd backend
 Install Dependencies (if using Composer):
 
-npm i
+npm i sql2,dotenv,
 # **Database Setup**:
 
 Create a new database named streamx_db in your MySQL server.
