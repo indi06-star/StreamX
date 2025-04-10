@@ -2,6 +2,8 @@
 
 ![image broken](https://github.com/indi06-star/Images/blob/af13e05cd872032d2f770ad45def4945229f9e53/Cart-ezgif.com-video-to-gif-converter%20(1).gif)
 
+#Overview on website
+
 A fully functional e-commerce website built by Indiphile,Wade,Tiffany,Anathi for the Module 3 assignment. StreamX is an online movie rental platform that offers pay-per-view access to a wide range of movies without requiring subscriptions. Our goal is to provide an affordable, flexible, and secure rental service that competes with platforms like Google Play Movies while offering a superior customer experience.
 Table of Contents
 Live Demo
@@ -13,7 +15,7 @@ Author
 Live Demo
 Link to the live deployed website
 
-Technologies Used
+#Technologies Used
 Front-end: Vue
 Styling: Custom CSS
 Back-end: node
@@ -21,7 +23,7 @@ Database: MySQL
 Setup Instructions
 Follow these steps to run the system on your local development environment:
 
-Prerequisites:
+#Prerequisites:
 
 MySQL Server installed and running
 Clone the Repository:
@@ -32,7 +34,7 @@ cd backend
 Install Dependencies (if using Composer):
 
 npm i
-Database Setup:
+#Database Setup:
 
 Create a new database named streamx_db in your MySQL server.
 Import the database schema from the provided SQL file (StreamXDB.sql - if applicable). You can do this using a MySQL client (like phpMyAdmin or MySQL Workbench) or the command line:
@@ -55,7 +57,7 @@ npm run serve for frontend
 node --watch index.js for api 
 Then, open your web browser and navigate to [http://localhost:8000.](http://localhost:8080/)
 
-Key Features
+#Key Features
 This e-commerce website implements the following key features:
 
 User Login and Registration: Secure user registration and login functionality.
@@ -68,7 +70,7 @@ Authentication and User Management: Secure authentication for users and potentia
 Service Data Management: An administrative interface for adding, editing, and deleting products.
 Payment System Integration: Integration with a payment gateway (a simulated process).
 Overall System Integration (Front-end and Back-end): Seamless communication and data flow between the user interface and the server-side logic.
-Credits 
+#Credits 
 
 Vue: [https://vuejs.org/]
 MySql: [https://www.mysql.com/]
