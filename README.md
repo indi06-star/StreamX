@@ -61,9 +61,9 @@ This e-commerce website implements the following key features:
 User Login and Registration: Secure user registration and login functionality.
 User Interface Design and UX/UI Principles: A user-friendly and visually appealing design adhering to UX/UI best practices.
 Service Display and Catalog Implementation: Clear and organized display of movies with detailed information and browsing capabilities.
-Movie Cart and Order Process: A functional movie cart allowing users to add, modify, and checkout with their selected items.
+Movie Cart and Order Process: A functional movie cart allowing users to add, modify, and checkout with their selected movie.
 Responsive Design Implementation: The website adapts seamlessly to various screen sizes (desktop, tablet, mobile).
-Database Design and Implementation: A well-structured database (StreamXDBt) to store user, product, and order data.
+Database Design and Implementation: A well-structured database (StreamXDB) to store user, movie, and order data.
 Authentication and User Management: Secure authentication for users and potentially an administrative interface for managing the website.
 Service Data Management: An administrative interface for adding, editing, and deleting products.
 Payment System Integration: Integration with a payment gateway (a simulated process).
@@ -74,6 +74,6 @@ Vue: [https://vuejs.org/]
 MySql: [https://www.mysql.com/]
 Node : [https://nodejs.org/en]
 Author
-Indiphile Wade Tifanny Anathi
+Indiphile, Wade, Tifanny ,Anathi
 
 https://github.com/indi06-star
