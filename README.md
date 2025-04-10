@@ -23,7 +23,7 @@ Database: MySQL
 Setup Instructions
 Follow these steps to run the system on your local development environment:
 
-#Prerequisites:
+# **Prerequisites** :
 
 MySQL Server installed and running
 Clone the Repository:
@@ -34,7 +34,7 @@ cd backend
 Install Dependencies (if using Composer):
 
 npm i
-#Database Setup:
+# **Database Setup**:
 
 Create a new database named streamx_db in your MySQL server.
 Import the database schema from the provided SQL file (StreamXDB.sql - if applicable). You can do this using a MySQL client (like phpMyAdmin or MySQL Workbench) or the command line:
@@ -57,7 +57,7 @@ npm run serve for frontend
 node --watch index.js for api 
 Then, open your web browser and navigate to [http://localhost:8000.](http://localhost:8080/)
 
-#Key Features
+# **Key Features**
 This e-commerce website implements the following key features:
 
 User Login and Registration: Secure user registration and login functionality.
