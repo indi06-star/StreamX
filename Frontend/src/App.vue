@@ -4,7 +4,7 @@
     <router-view />
     <div v-if="showAuthModal" class="modal-overlay" @click.self="closeAuthModal">
       <div class="modal-content">
-        <button class="close-btn" @click="closeAuthModal">:heavy_multiplication_x:</button>
+        <button class="close-btn" @click="closeAuthModal">x</button>
         <Login v-if="authType === 'login'" @close-modal="closeAuthModal" />
         <SignUp v-if="authType === 'signup'" @close-modal="closeAuthModal" />
       </div>
