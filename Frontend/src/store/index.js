@@ -69,7 +69,7 @@ export default createStore({
   actions: {
     async signUpUser({ commit }, userData) {
       try {
-        await axios.post('http://localhost:3001/users', userData);
+        await axios.post('https://stream-dva1pn6x3-indiphiles-projects.vercel.app/users', userData);
         toast.success('Signup successful! Please log in.', { position: 'top-center', autoClose: 3000 });
       } catch (error) {
         commit('SET_ERROR', 'Signup failed');
@@ -79,7 +79,7 @@ export default createStore({
     },
     async loginUser({ commit }, loginInfo) {
       try {
-        const { data } = await axios.post('http://localhost:3001/users/login', loginInfo);
+        const { data } = await axios.post('https://stream-dva1pn6x3-indiphiles-projects.vercel.app/users/login', loginInfo);
         commit('SET_USER', data.user);
         commit('SET_TOKEN', data.token);
         commit('SET_IS_ADMIN', data.user.email?.endsWith('@StreamX.com'));
@@ -93,8 +93,8 @@ export default createStore({
     async getData({ commit }) {
       try {
         const [moviesResponse, usersResponse] = await Promise.all([
-          axios.get('http://localhost:3001/movies'),
-          axios.get('http://localhost:3001/users'),
+          axios.get('https://stream-dva1pn6x3-indiphiles-projects.vercel.app/movies'),
+          axios.get('https://stream-dva1pn6x3-indiphiles-projects.vercel.app/users'),
         ]);
         commit('setMovies', moviesResponse.data);
         commit('setUsers', usersResponse.data);
@@ -104,7 +104,7 @@ export default createStore({
     },
     async deleteMovie({ dispatch }, movie_id) {
       try {
-        await axios.delete(`http://localhost:3001/movies/${movie_id}`);
+        await axios.delete(`https://stream-dva1pn6x3-indiphiles-projects.vercel.app/movies/${movie_id}`);
         dispatch('getData');
       } catch {
         toast.error('Failed to delete movie');
@@ -112,7 +112,7 @@ export default createStore({
     },
     async postMovie({ dispatch }, movieData) {
       try {
-        await axios.post('http://localhost:3001/movies', movieData);
+        await axios.post('https://stream-dva1pn6x3-indiphiles-projects.vercel.app/movies', movieData);
         dispatch('getData');
       } catch {
         toast.error('Failed to add movie');
@@ -120,7 +120,7 @@ export default createStore({
     },
     async patchMovie({ dispatch }, { movie_id, updatedData }) {
       try {
-        await axios.patch(`http://localhost:3001/movies/${movie_id}`, updatedData);
+        await axios.patch(`https://stream-dva1pn6x3-indiphiles-projects.vercel.app/movies/${movie_id}`, updatedData);
         dispatch('getData');
       } catch {
         toast.error('Failed to update movie');
@@ -128,7 +128,7 @@ export default createStore({
     },
     async deleteUser({ dispatch }, user_id) {
       try {
-        await axios.delete(`http://localhost:3001/users/${user_id}`);
+        await axios.delete(`https://stream-dva1pn6x3-indiphiles-projects.vercel.app/users/${user_id}`);
         dispatch('getData');
       } catch {
         toast.error('Failed to delete user');
@@ -136,7 +136,7 @@ export default createStore({
     },
     async patchUser({ dispatch }, { user_id, updatedData }) {
       try {
-        await axios.patch(`http://localhost:3001/users/${user_id}`, updatedData);
+        await axios.patch(`https://stream-dva1pn6x3-indiphiles-projects.vercel.app/users/${user_id}`, updatedData);
         dispatch('getData');
       } catch {
         toast.error('Failed to update user');
@@ -145,7 +145,7 @@ export default createStore({
     async fetchComingSoonMovies({ commit }) {
       commit('SET_LOADING', true);
       try {
-        const { data } = await axios.get('http://localhost:3001/coming_soon');
+        const { data } = await axios.get('https://stream-dva1pn6x3-indiphiles-projects.vercel.app/coming_soon');
         commit('SET_COMING_SOON_MOVIES', data);
       } catch (error) {
         commit('SET_ERROR', 'Failed to fetch movies');
@@ -159,7 +159,7 @@ export default createStore({
     async addToCart({ commit, state }, movieId) {
       try {
         const response = await axios.post(
-          'http://localhost:3001/cart',
+          'https://stream-dva1pn6x3-indiphiles-projects.vercel.app/cart',
           { movie_id: movieId },
           {
             headers: {
@@ -178,7 +178,7 @@ export default createStore({
 
     async fetchCart({ commit, state }) {
       try {
-        const response = await axios.get('http://localhost:3001/cart', {
+        const response = await axios.get('https://stream-dva1pn6x3-indiphiles-projects.vercel.app/cart', {
           headers: {
             Authorization: `Bearer ${state.token}`,
           },
@@ -190,7 +190,7 @@ export default createStore({
     },
     async deleteFromCart({ commit, state }, movieId) {
       try {
-        const response = await axios.delete(`http://localhost:3001/cart/${movieId}`, {
+        const response = await axios.delete(`https://stream-dva1pn6x3-indiphiles-projects.vercel.app/cart/${movieId}`, {
           headers: {
             Authorization: `Bearer ${state.token}`,
           },
@@ -219,7 +219,7 @@ export default createStore({
 
         // Make the API call to process the payment
         const response = await axios.post(
-          'http://localhost:3001/payments', // Endpoint for processing payments
+          'https://stream-dva1pn6x3-indiphiles-projects.vercel.app/payments', // Endpoint for processing payments
           paymentData,  // Send the payment data (amount, user_id, payment_method)
           {
             headers: { Authorization: `Bearer ${state.token}` },  // Pass the token for authorization
@@ -264,7 +264,7 @@ export default createStore({
         console.log('Fetching payment details for payment ID:', paymentId);
 
         // Make the API call to fetch payment details
-        const response = await axios.get(`http://localhost:3001/payments/${paymentId}`, {
+        const response = await axios.get(`https://stream-dva1pn6x3-indiphiles-projects.vercel.app/payments/${paymentId}`, {
           headers: { Authorization: `Bearer ${state.token}` },  // Include the token for authorization
         });
 
