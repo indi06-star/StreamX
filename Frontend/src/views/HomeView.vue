@@ -58,7 +58,7 @@ export default {
   methods: {
     async fetchMovies() {
       try {
-        const response = await axios.get('https://stream-dva1pn6x3-indiphiles-projects.vercel.app/movies');
+        const response = await axios.get('https://stream-x-iota.vercel.app/movies');
         this.movies = response.data;
       } catch (error) {
         console.error("There was an error fetching the movies:", error);
